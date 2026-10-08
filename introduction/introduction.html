@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김동주의 자기소개 페이지</title>
+    <style>
+        /* [공통] 글자를 가로·세로 완벽 정중앙 배치 */
+        .center-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        #wrapper {
+            position: relative; 
+            width: 100px;
+            height: 100px;
+            background-image: url("Sonato\ eye.png");
+            background-size: 100px 100px;    
+            background-position: center;  
+            background-repeat: no-repeat;
+            margin: 20px auto;
+            border: 2px dashed #e7e2f3;
+            overflow: visible; 
+            border-radius: 10%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        #wrapper:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(231, 226, 243, 0.3);
+            border-color: #3b27bc;
+            /* 상하 이동(translateY)과 그림자(box-shadow) 효과가 
+             0.3초(0.3s) 동안 부드럽고 자연스럽게(ease) 변화하도록 설정 */
+        }
+
+        .notice {
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: end;
+        }
+
+        #container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%); 
+            top: 120px;                  
+            
+            width: 1540px;
+            background-color: #000000;
+            font-family: 'Malgun Gothic', sans-serif; 
+            color: gold;
+            background-size: auto;    
+            background-position: center;  
+            background-repeat: no-repeat;
+
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+        }
+
+        #wrapper:hover #container {
+            opacity: 1;
+            visibility: visible;
+            /* 마우스를 대면 전체 상자가 투명(opacity: 0) 상태에서 
+             0.5초(0.5s) 동안 부드럽게 서서히 나타나도록 설정 */
+        }
+
+        #void1 {
+            clear : both;
+            width: 25%;
+            height: 20px;
+            float: left;
+        }
+
+        #header {
+            float: left;
+            width: 50%;
+            height: 150px;
+            background-color: #3b27bc;
+            padding: 30px;
+            border : 2px solid black;
+            box-sizing: border-box;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #header:hover {
+            background-color: #6356bc;
+            border-radius: 50%;
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(59, 39, 188, 0.5);
+         /* 0.4초(0.4s) 동안 변하는데, cubic-bezier(...) 가 들어가서 그냥 변하는 게 아니라 
+         마치 젤리나 용수철처럼 '통통 튀면서' 둥그렇게 원형으로 변하는 효과 */
+        }
+
+        #void2 {
+            clear : both;
+            width: 5%;
+            height: 30px;
+            float: left;
+        }
+
+        #sidebar1 {
+            width: 35%;
+            height: 400px;
+            background-color: #9244af;
+            color: #9244af;
+            float : left;
+            padding: 30px;
+            border : 2px solid black;
+            box-sizing: border-box;
+            transition: all 0.4s ease;
+        }
+
+        #sidebar1:hover {
+            background-color: #ab6dc2;
+            color: black;
+            border-radius: 10%;
+            transform: translateY(-10px);
+        }
+
+        #contents {
+            width: 55%;
+            height: 700px;
+            background-color: #619d7d;
+            color: #619d7d;
+            float : left;
+            padding: 30px;
+            border : 2px solid black;
+            box-sizing: border-box;
+            transition: all 0.4s ease;
+        }
+
+        #contents:hover {
+            background-color: #a9dfc2;
+            color: black;
+            border-radius: 10%;
+            transform: scale(1.03);
+        }
+
+        #void0 {
+            width: 2.5%;
+            height: 30px;
+            float: left;
+        }
+        
+        #sidebar2 {
+            width: 45%;
+            height: 300px;
+            background-color: #a92f55;
+            color : #a92f55;
+            float : left;
+            padding: 30px;
+            border : 2px solid black;
+            box-sizing: border-box;
+            transition: all 0.4s ease;
+        }
+
+        #sidebar2:hover {
+            background-color: #ca6a88;
+            color: black;
+            border-radius: 30%;
+            transform: translateY(-12px);
+        }
+
+        #void02 {
+            width: 20%;
+            height: 30px;
+            float: left;
+        }
+
+        #sidebar3 {
+            width: 25%;
+            height: 400px;
+            background-color: #efb401;
+            color : #efb401;
+            float : left;
+            padding: 30px;
+            border : 2px solid black;
+            box-sizing: border-box;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #sidebar3:hover {
+            background-color: #95834b;
+            color: black;
+            border-radius: 50%;
+            transform: scale(1.08);
+        }
+        
+        #void03 {
+            width: 2%;
+            height: 30px;
+            float: left;
+        }
+
+        #void04 {
+            clear : both;
+            width: 40%;
+            height: 300px;
+            float: left;
+        }
+
+        #footer {
+            clear: both;
+            width: 100%;
+            height: 200px;
+            background-color: rgba(0, 0, 0, 0);
+            padding: 30px;
+            color: rgba(163, 73, 73, 0.156); 
+            box-sizing: border-box;
+            float: left;
+            transition: all 0.4s ease;
+        }
+
+        #footer:hover {
+            background-color: #93aaaa;
+            color: black;
+            border-radius: 50%;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div class="notice">🔍 </div>
+        
+        <div id="container">
+            <div id="void1"></div>
+            <div id="void1"></div>
+            <div id="header" class="center-box"> 사이트 소개문 </div>
+            <div id="void2"></div>
+            <div id="void2"></div>
+            <div id="sidebar1" class="center-box"> 내 소개글 </div>
+            <div id="void0"></div>
+            <div id="contents" class="center-box"> 내 스펙 </div>
+            <div id="void2"></div>
+            <div id="void2"></div>
+            <div id="void02"></div>
+            <div id="sidebar2" class="center-box"> 내 소개글 </div>
+            <div id="void03"></div>
+            <div id="sidebar3" class="center-box"> 내 소개글 </div>
+            <div id="void04"></div>
+            <div id="footer" class="center-box"> 기타 링크 </div>
+        </div>
+    </div>
+</body>
+</html>
