@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아카이브</title>
+</head>
+<body>
+    <div>
+        취미 :
+        <label><input type="radio" name="subject" value="java">자바공부</label>
+        <label><input type="radio" name="subject" value="oracle">오라클공부</label>
+        <label><input type="radio" name="subject" value="html">html공부</label>
+        <label><input type="radio" name="subject" value="javascript">자바스크립트공부</label>
+    </div>
+
+    <img src="" id="image" onclick="fnTest()">
+
+</body>
+</html>
+<script>
+    function fnTest(){
+        let obj = document.querySelector("#image");
+        obj.src = "../images/java.jpg"
+    }
+</script>
+
+<body>
+
+</body>
+</html>
+<script>
+    function fnTest() {
+        let list = document.querySelectorAll("input[name='subject']:checked");
+        
+        for (let i=0; i<list.length; i++) {
+            console.log(list[i].value);
+        }
+    }
+</script>

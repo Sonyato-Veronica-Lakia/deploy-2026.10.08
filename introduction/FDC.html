@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fairy Dispatch Company - 통합 관리 시스템</title>
+  <!-- 외부 CSS 스타일시트 연결 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div id="container">
+
+    <!-- 헤더 영역 -->
+    <div class="layout-box" id="header">
+      <div id="logo">Fairy Dispatch Company</div>
+      <div id="menu">
+        <a href="javascript:;">List</a>
+        <a href="javascript:;">My Page</a>
+        <a href="javascript:;">Logout</a>
+      </div>
+    </div>
+
+    <!-- 사이드 메뉴 영역 (Watchers 테마) -->
+    <div class="layout-box" id="side">
+      <div class="side-menu-title">🔮 Watchers</div>
+      <div class="side-link active" data-target="dashboard-view">Main</div>
+      <div class="side-link" data-target="product-view">Fairy</div>
+      <div class="side-link" data-target="logs-view">Log</div>
+      <div class="side-link" data-target="settings-view">Modify</div>
+    </div>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <div id="contents">
+
+      <!-- [탭 1] Main (대시보드 화면) -->
+      <div id="dashboard-view" class="tab-content active">
+        <div class="widget">
+          <div class="widget-title">✨ 누적 소환 횟수</div>
+          <div id="total-summons" class="word">1,234회 소환됨</div>
+        </div>
+
+        <div class="widget">
+          <div class="widget-title">💰 마력 정산 매출</div>
+          <div id="total-revenue" class="word">5,123,120 MP</div>
+        </div>
+
+        <div class="widget">
+          <div class="widget-title">🌙 신규 계약 마법사</div>
+          <div class="word">42명 방문</div>
+        </div>
+
+        <div class="widget">
+          <div class="widget-title">⚙️ 결계(서버) 상태</div>
+          <div class="word" style="color: #51ff7e;">안정 (Level 4)</div>
+        </div>
+
+        <div class="widget">
+          <div class="widget-title">🔔 최신 예언 / 알림</div>
+          <div class="word" style="font-size: 15px;">현재 감지된 악몽 파편 없음</div>
+        </div>
+      </div>
+
+      <!-- [탭 2] Fairy (요정 관리 화면) -->
+      <div id="product-view" class="tab-content">
+        <!-- 상품 A -->
+        <div class="box" data-price="150000">
+          <img src="../images/Akito4.png" alt="A" class="box-img">
+          <div class="box-info">
+            <div class="box-title">Sweet Dream Fairy</div>
+            <div class="box-desc">당신의 꿈을 악몽으로부터 포근하게 지켜줄 요정.</div>
+          </div>
+          <a href="javascript:;" class="btn-buy">소환하기</a>
+        </div>
+
+        <!-- 상품 B -->
+        <div class="box" data-price="250000">
+          <img src="../images/Akito3.png" alt="B" class="box-img">
+          <div class="box-info">
+            <div class="box-title">Spicy Reality Fairy</div>
+            <div class="box-desc">당신의 가벼운 욕구를 실현시켜 줄 요정.</div>
+          </div>
+          <a href="javascript:;" class="btn-buy">소환하기</a>
+        </div>
+
+        <!-- 상품 C -->
+        <div class="box" data-price="500000">
+          <img src="../images/Akito5.png" alt="C" class="box-img">
+          <div class="box-info">
+            <div class="box-title">Mysterious Necromancy Fairy</div>
+            <div class="box-desc">당신의 소중한 사람을 다시 만나게 해주는 요정.</div>
+          </div>
+          <a href="javascript:;" class="btn-buy">소환하기</a>
+        </div>
+      </div>
+
+      <!-- [탭 3] Log (소환 로그 화면) -->
+      <div id="logs-view" class="tab-content">
+        <div class="log-container">
+          <div class="log-header-title">📜 실시간 요정 소환 프로토콜</div>
+          <ul id="log-list" class="log-list">
+            <!-- 자바스크립트로 소환 로그 기록이 여기에 하나씩 추가됩니다 -->
+          </ul>
+
+          <!-- 🔮 [새로 추가] 우측 하단 전체 초기화 버튼 외부 감싸는 영역 -->
+          <div class="log-footer-actions">
+            <button id="log-clear-btn" class="log-clear-btn">🪄 로그 전체 초기화</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- [탭 4] Modify (설정 화면) -->
+      <div id="settings-view" class="tab-content">
+        ⚙️ 마법 결계 및 시스템 환경설정 영역
+      </div>
+
+    </div>
+
+    <!-- 푸터 영역 -->
+    <div class="layout-box" id="footer">
+      © Fairy Dispatch Company All rights reserved. Managed by Sonyato.
+    </div>
+
+  </div>
+
+  <!-- 🔮 원래 있던 커스텀 알림창 (모달) 뼈대 -->
+  <div id="custom-alert" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">🔮 시스템 예언</div>
+      <div id="modal-message" class="modal-body">요정이 성공적으로 소환되었습니다.</div>
+      <button id="modal-close-btn" class="modal-btn">확인</button>
+    </div>
+  </div>
+
+  <!-- 🔮 [새로 추가] 주소가 안 뜨는 커스텀 '확인 / 취소' 모달 창 뼈대 -->
+  <div id="custom-confirm" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">⚠️ 결계 경고</div>
+      <div id="confirm-message" class="modal-body">정말로 모든 소환 로그를 파기하시겠습니까?</div>
+      <div style="display: flex; gap: 10px; justify-content: center;">
+        <button id="confirm-yes-btn" class="modal-btn" style="background-color: #ff4d4d;">확인</button>
+        <button id="confirm-no-btn" class="modal-btn" style="background-color: #777;">취소</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 외부 자바스크립트 파일 연결 -->
+  <script src="script.js"></script>
+</body>
+
+</html>
