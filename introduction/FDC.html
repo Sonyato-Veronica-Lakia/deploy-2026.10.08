@@ -18,7 +18,8 @@
       <div id="logo">Fairy Dispatch Company</div>
       <div id="menu">
         <a href="javascript:;">List</a>
-        <a href="javascript:;">My Page</a>
+        <!-- 🔮 마이페이지 링크 수정을 위해 href 고정 자리를 비워두었습니다. 나중에 따옴표 안에 원하는 주소를 넣으세요 -->
+        <a href="https://example.com" id="mypage-link">My Page</a>
         <a href="javascript:;">Logout</a>
       </div>
     </div>
@@ -34,7 +35,7 @@
 
     <!-- 메인 콘텐츠 영역 -->
     <div id="contents">
-
+      
       <!-- [탭 1] Main (대시보드 화면) -->
       <div id="dashboard-view" class="tab-content active">
         <div class="widget">
@@ -69,7 +70,7 @@
         <div class="box" data-price="150000">
           <img src="../images/Akito4.png" alt="A" class="box-img">
           <div class="box-info">
-            <div class="box-title">Sweet Dream Fairy</div>
+            <div class="box-title">Sweet Dream Angel</div>
             <div class="box-desc">당신의 꿈을 악몽으로부터 포근하게 지켜줄 요정.</div>
           </div>
           <a href="javascript:;" class="btn-buy">소환하기</a>
@@ -79,7 +80,7 @@
         <div class="box" data-price="250000">
           <img src="../images/Akito3.png" alt="B" class="box-img">
           <div class="box-info">
-            <div class="box-title">Spicy Reality Fairy</div>
+            <div class="box-title">Spicy Reality Angel</div>
             <div class="box-desc">당신의 가벼운 욕구를 실현시켜 줄 요정.</div>
           </div>
           <a href="javascript:;" class="btn-buy">소환하기</a>
@@ -89,7 +90,7 @@
         <div class="box" data-price="500000">
           <img src="../images/Akito5.png" alt="C" class="box-img">
           <div class="box-info">
-            <div class="box-title">Mysterious Necromancy Fairy</div>
+            <div class="box-title">Mysterious Necromancy Angel</div>
             <div class="box-desc">당신의 소중한 사람을 다시 만나게 해주는 요정.</div>
           </div>
           <a href="javascript:;" class="btn-buy">소환하기</a>
@@ -103,8 +104,6 @@
           <ul id="log-list" class="log-list">
             <!-- 자바스크립트로 소환 로그 기록이 여기에 하나씩 추가됩니다 -->
           </ul>
-
-          <!-- 🔮 [새로 추가] 우측 하단 전체 초기화 버튼 외부 감싸는 영역 -->
           <div class="log-footer-actions">
             <button id="log-clear-btn" class="log-clear-btn">🪄 로그 전체 초기화</button>
           </div>
@@ -120,12 +119,32 @@
 
     <!-- 푸터 영역 -->
     <div class="layout-box" id="footer">
-      © Fairy Dispatch Company All rights reserved. Managed by Sonyato.
+      © Fairy Dispatch Company All rights reserved. Managed by Supreme Angel.
     </div>
 
   </div>
 
-  <!-- 🔮 원래 있던 커스텀 알림창 (모달) 뼈대 -->
+  <!-- 🔮 1단계: 소환하기 버튼 누르면 가격 띄우고 의사를 묻는 소환 전용 컨펌창 -->
+  <div id="summon-confirm-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">🔮 소환 의식 의뢰</div>
+      <div id="summon-confirm-message" class="modal-body">이 요정을 소환하시겠습니까?</div>
+      <div style="display: flex; gap: 10px; justify-content: center;">
+        <button id="summon-yes-btn" class="modal-btn" style="background-color: purple;">소환</button>
+        <button id="summon-no-btn" class="modal-btn" style="background-color: #777;">취소</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔮 2단계: '소환' 클릭 시 2초 동안 부드럽게 가속 회전하는 마법진 로딩 스피너 -->
+  <div id="magic-spinner" class="modal-overlay">
+    <div class="spinner-box">
+      <div class="crystal-spinner"></div>
+      <p style="color: violet; font-weight: bold; margin-top: 15px; font-size: 18px; letter-spacing: 2px;">차원 결계 연결 중...</p>
+    </div>
+  </div>
+
+  <!-- 3단계: 소환이 완전히 끝나면 최종 표기되는 완료 알림창 (모달) 뼈대 -->
   <div id="custom-alert" class="modal-overlay">
     <div class="modal-box">
       <div class="modal-header">🔮 시스템 예언</div>
@@ -134,7 +153,7 @@
     </div>
   </div>
 
-  <!-- 🔮 [새로 추가] 주소가 안 뜨는 커스텀 '확인 / 취소' 모달 창 뼈대 -->
+  <!-- 로그 전체 파기 시 작동하는 경고용 '확인 / 취소' 모달 창 뼈대 -->
   <div id="custom-confirm" class="modal-overlay">
     <div class="modal-box">
       <div class="modal-header">⚠️ 결계 경고</div>
