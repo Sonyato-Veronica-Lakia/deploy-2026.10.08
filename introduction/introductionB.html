@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김동주의 자기소개 페이지</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Malgun Gothic', sans-serif;
+            background-color: black;
+            padding-top: 40px;
+        }
+
+        /* 글자 중앙 정렬 */
+        .center-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* [마우스 이탈 방지] 본문 영역으로 마우스가 부드럽게 진입하도록 돕는 가교 구역 */
+        #trigger-zone {
+            width: fit-content;
+            margin: 0 auto;
+            padding-bottom: 40px;
+            position: relative;
+            z-index: 100;
+        }
+
+        /* 시작 이미지 (소냐트 고유 이미지 세팅 원본 보존) */
+        #wrapper {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            background-image: url("Sonato eye.png");
+            background-size: 100px 100px;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 2px dashed #e7e2f3;
+            border-radius: 10%;
+            cursor: pointer;
+            transition: transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+        }
+
+        #wrapper:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(231, 226, 243, 0.3);
+            border-color: #3b27bc;
+        }
+
+        .notice {
+            font-size: 18px;
+            text-align: right;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        /* 전체 자기소개 페이지 (순정 12컬럼 격자 완벽 고정) */
+        #container {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: min(1540px, 95vw);
+            padding: 30px;
+            background-color: #000000;
+            color: gold;
+
+            display: grid;
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+            grid-template-areas:
+                ". header header header header header header header header header header ."
+                "sidebar1 sidebar1 sidebar1 sidebar1 . contents contents contents contents contents contents ."
+                ". . . . . contents contents contents contents contents contents ."
+                ". sidebar2 sidebar2 sidebar2 sidebar2 contents contents contents contents contents contents ."
+                ". . . sidebar3 sidebar3 sidebar3 sidebar3 . . . . ."
+                ". footer footer footer footer footer footer footer footer footer footer .";
+
+            grid-template-rows:
+                180px 220px 150px 180px 320px 200px;
+
+            gap: 20px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        /* 눈동자 래퍼 영역 전체에 호버가 유지될 때 대시보드가 열림 */
+        #trigger-zone:hover #container {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        /* 그리드 고유 자리를 사수하기 위한 뼈대 영역 정의 */
+        .grid-slot {
+            min-width: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #slot-header {
+            grid-area: header;
+        }
+
+        #slot-sidebar1 {
+            grid-area: sidebar1;
+        }
+
+        #slot-contents {
+            grid-area: contents;
+        }
+
+        #slot-sidebar2 {
+            grid-area: sidebar2;
+        }
+
+        #slot-sidebar3 {
+            grid-area: sidebar3;
+        }
+
+        #slot-footer {
+            grid-area: footer;
+        }
+
+        /* 🔮 [버튼형 링크 개편] 기본 테두리와 밑줄을 없애고 박스 전체를 링크화 */
+        .info-box-link {
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 2초 동안 춤추는 내부 알맹이 실상자 스타일 */
+        .info-box {
+            width: 100%;
+            height: 100%;
+            padding: 30px;
+            border: 2px solid black;
+            font-weight: bold;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.4s ease, border-radius 0.4s ease, transform 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+
+            /* 평소에는 숨겨두어 애니메이션이 흘러나올 때 비로소 보이도록 기본 세팅 */
+            opacity: 0;
+        }
+
+        /* 🔮 [완벽 복원] 마우스를 올리기 전에는 배경색과 완벽히 일치하여 절대 보이지 않는 순정 은닉 컬러 */
+        #header {
+            background-color: #3b27bc;
+            color: gold;
+        }
+
+        #sidebar1 {
+            background-color: #9244af;
+            color: #9244af;
+        }
+
+        #contents {
+            background-color: #619d7d;
+            color: #619d7d;
+        }
+
+        #sidebar2 {
+            background-color: #a92f55;
+            color: #a92f55;
+        }
+
+        #sidebar3 {
+            background-color: #95834b;
+            color: #95834b;
+        }
+
+        #footer {
+            background-color: rgba(0, 0, 0, 0);
+            color: rgba(163, 73, 73, 0.156);
+        }
+
+        /* 🔥 마우스를 정확히 해당 상자 위로 올렸을 때만 마법처럼 글씨가 깨어나는 순정 호버 배색 */
+        #header:hover {
+            background-color: #6356bc;
+            border-radius: 35%;
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(59, 39, 188, 0.5);
+        }
+
+        #sidebar1:hover {
+            background-color: #ab6dc2;
+            color: black;
+            border-radius: 10%;
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(146, 68, 175, 0.4);
+        }
+
+        #contents:hover {
+            background-color: #a9dfc2;
+            color: black;
+            border-radius: 10%;
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(97, 157, 125, 0.4);
+        }
+
+        #sidebar2:hover {
+            background-color: #ca6a88;
+            color: black;
+            border-radius: 30%;
+            transform: translateY(-12px);
+            box-shadow: 0 10px 25px rgba(169, 47, 85, 0.4);
+        }
+
+        #sidebar3:hover {
+            background-color: #efb401;
+            color: black;
+            border-radius: 50%;
+            transform: scale(1.08);
+            box-shadow: 0 10px 25px rgba(239, 180, 1, 0.4);
+        }
+
+        #footer:hover {
+            background-color: #93aaaa;
+            color: black;
+            border-radius: 50%;
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(147, 170, 170, 0.4);
+        }
+
+        /* ===================================================
+           🎬 [2번 코드 시작] 격자 배치를 수호하며 2초 동안 차오르는 애니메이션
+           =================================================== */
+        #trigger-zone:hover #header {
+            animation: bounce-down 2.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+
+        #trigger-zone:hover #sidebar1 {
+            animation: slide-right-spin 2.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+
+        #trigger-zone:hover #contents {
+            animation: rainbow-grow 2.2s ease-in-out forwards;
+        }
+
+        #trigger-zone:hover #sidebar2 {
+            animation: slide-left 2.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+
+        #trigger-zone:hover #sidebar3 {
+            animation: pop-spin 2.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+
+        #trigger-zone:hover #footer {
+            animation: fade-up 2.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+
+        /* 🎬 2.2초 동안 원래 자리 안에서 안전하게 춤추는 정밀 키프레임 */
+        @keyframes bounce-down {
+            0% {
+                transform: translateY(-80px);
+                opacity: 0;
+            }
+
+            40% {
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slide-right-spin {
+            0% {
+                transform: scale(0.6) rotate(-25deg);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes rainbow-grow {
+            0% {
+                transform: scale(0.9);
+                opacity: 0;
+                background-color: #111;
+            }
+
+            50% {
+                background-color: #3b27bc;
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+                background-color: #619d7d;
+            }
+        }
+
+        @keyframes slide-left {
+            0% {
+                transform: translateX(80px);
+                opacity: 0;
+            }
+
+            40% {
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pop-spin {
+            0% {
+                transform: scale(0.4) rotate(90deg);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-up {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* 태블릿 화면 반응형 */
+        @media (max-width: 1024px) {
+            #container {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                grid-template-areas:
+                    "header header"
+                    "sidebar1 contents"
+                    "sidebar2 contents"
+                    "sidebar3 sidebar3"
+                    "footer footer";
+                grid-template-rows: 180px 250px 250px 300px 180px;
+                gap: 15px;
+                padding: 20px;
+            }
+
+            .grid-slot {
+                grid-area: auto !important;
+            }
+
+            #container .info-box {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        /* 모바일 화면 반응형 */
+        @media (max-width: 600px) {
+            #container {
+                width: 95vw;
+                grid-template-columns: minmax(0, 1fr);
+                grid-template-areas: "header" "sidebar1" "contents" "sidebar2" "sidebar3" "footer";
+                grid-template-rows: repeat(6, auto);
+                grid-auto-rows: minmax(150px, auto);
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .info-box {
+                padding: 15px;
+            }
+
+            .grid-slot {
+                grid-area: auto !important;
+            }
+
+            #container .info-box {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 🔮 마우스 이탈 및 애니메이션 제어 통합 래퍼 존 -->
+    <div id="trigger-zone">
+
+        <div id="wrapper" tabindex="0">
+            <div class="notice">🔍</div>
+        </div>
+
+        <div id="container">
+            <!-- 🔮 [버튼형 전면 개편] 각 슬롯 내부 전체를 클릭 가능한 링크(a 태그)로 래핑 완료 -->
+
+            <!-- 1. 사이트 소개문 링크 -->
+            <div class="grid-slot" id="slot-header">
+                <a href="javascript:;" class="info-box-link">
+                    <div id="header" class="info-box center-box">사이트 소개문</div>
+                </a>
+            </div>
+
+            <!-- 2. 첫 번째 자기소개 링크 -->
+            <div class="grid-slot" id="slot-sidebar1">
+                <a href="javascript:;" class="info-box-link">
+                    <div id="sidebar1" class="info-box center-box">내 소개글</div>
+                </a>
+            </div>
+
+            <!-- 3. 내 스펙 링크 -->
+            <div class="grid-slot" id="slot-contents">
+                <a href="javascript:;" class="info-box-link">
+                    <div id="contents" class="info-box center-box">내 스펙</div>
+                </a>
+            </div>
+
+            <!-- 4. 두 번째 자기소개 링크 -->
+            <div class="grid-slot" id="slot-sidebar2">
+                <a href="javascript:;" class="info-box-link">
+                    <div id="sidebar2" class="info-box center-box">내 소개글</div>
+                </a>
+            </div>
+
+            <!-- 5. 세 번째 자기소개 링크 -->
+            <div class="grid-slot" id="slot-sidebar3">
+                <a href="javascript:;" class="info-box-link">
+                    <div id="sidebar3" class="info-box center-box">내 소개글</div>
+                </a>
+            </div>
+
+            <!-- 6. 기타 링크 (하단 포탈) -->
+            <div class="grid-slot" id="slot-footer">
+                <a href="javascript:;" class="info-box-link">
+                    <div id="footer" class="info-box center-box">기타 링크</div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
