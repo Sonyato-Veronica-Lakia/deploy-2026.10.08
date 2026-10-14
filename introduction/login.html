@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fairy Dispatch Company - 마법 결계 해제</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        /* 회원가입창과 동일한 배경 세팅 */
+        body {
+            background-color: #73607b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        /* 메인 로그인 박스 */
+        #app {
+            background-color: darkviolet;
+            border: 3px solid violet;
+            width: 100%;
+            max-width: 400px;
+            padding: 45px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        #container h2 {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        #container p {
+            color: #e0b0ff;
+            font-size: 14px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* 입력 폼 그룹 */
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group span {
+            display: block;
+            font-size: 13px;
+            color: violet;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            font-size: 14px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border: 2px solid purple;
+            border-radius: 8px;
+            outline: none;
+            color: #333;
+        }
+
+        .input-group input:focus {
+            border-color: violet;
+            box-shadow: 0 0 10px rgba(238, 130, 238, 0.6);
+        }
+
+        /* 버튼 디자인 공통 */
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: purple;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: violet;
+            color: purple;
+        }
+
+        /* 하단 서브 메뉴 링크들 */
+        .bottom-links {
+            text-align: center;
+            font-size: 13px;
+            color: #e0b0ff;
+            line-height: 1.8;
+        }
+
+        .bottom-links a {
+            color: violet;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 5px;
+        }
+
+        .bottom-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* 🔮 대시보드 모달 감성을 그대로 구현한 찾기 팝업 창 */
+        .find-modal {
+            display: none; /* 평소엔 숨김 */
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .find-box {
+            background-color: darkviolet;
+            border: 3px solid violet;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 380px;
+            padding: 30px 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .find-header {
+            font-size: 18px;
+            font-weight: bold;
+            color: violet;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 🔐 메인 로그인 화면 -->
+    <div id="app">
+        <div id="container">
+            <h2>마법 결계 해제</h2>
+            <p>식별 코드와 비밀 주문을 입력하세요.</p>
+
+            <div class="input-group">
+                <span>차원 식별 코드 (ID)</span>
+                <input id="loginId" type="text" placeholder="아이디를 입력하세요">
+            </div>
+
+            <div class="input-group">
+                <span>비밀 주문 (Password)</span>
+                <input id="loginPwd" type="password" placeholder="비밀번호를 입력하세요">
+            </div>
+
+            <button type="button" class="login-btn" onclick="fnLogin()">결계 해제하기</button>
+
+            <div class="bottom-links">
+                <a href="javascript:;" onclick="openFindModal('id')">아이디 찾기</a> | 
+                <a href="javascript:;" onclick="openFindModal('pwd')">비밀번호 찾기</a>
+                <br>
+                아직 계약 전이신가요? <a href="../introduction/create_account.html">회원가입 페이지로</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔮 ID/PW 교차 찾기 공용 팝업창 모달 -->
+    <div id="findModal" class="find-modal">
+        <div class="find-box">
+            <div id="findHeader" class="find-header">계정 정보 조회</div>
+            
+            <div class="input-group">
+                <span>마법사 이름</span>
+                <input id="findName" type="text" placeholder="등록된 이름을 입력하세요">
+            </div>
+
+            <div class="input-group" id="dynamicFindGroup">
+                <!-- 자바스크립트로 아이디or비밀번호 라벨이 동적으로 바뀝니다 -->
+                <span id="dynamicLabel">비밀 주문 (PW)</span>
+                <input id="dynamicInput" type="text" placeholder="비밀번호 입력">
+            </div>
+
+            <button type="button" class="login-btn" id="findSubmitBtn" style="margin-bottom: 10px;">정보 추적하기</button>
+            <button type="button" class="login-btn" style="background-color: #777; margin-top: 0;" onclick="closeFindModal()">창 닫기</button>
+        </div>
+    </div>
+
+    <!-- 기능 제어 스크립트 파트는 아래 2부에서 이어집니다 -->
+</body>
+
+</html>
+<script>
+    // ==========================================
+    // 1. 회원가입 데이터 연동 및 로딩
+    // ==========================================
+    // 회원가입창(signup.html)에서 가입해 둔 마법사 명부를 그대로 동기화합니다.
+    let wizardAccounts = JSON.parse(localStorage.getItem('wizardAccounts')) || [];
+    
+    // 현재 찾기 모드 저장 변수 ('id' 또는 'pwd')
+    let currentFindMode = "id";
+
+    // ==========================================
+    // 2. 마법 결계 해제 (로그인 공정)
+    // ==========================================
+    function fnLogin() {
+        const idInput = document.getElementById("loginId");
+        const pwdInput = document.getElementById("loginPwd");
+        
+        const id = idInput.value.trim();
+        const pwd = pwdInput.value;
+
+        if (id.length < 1) {
+            alert("🔮 시스템 예언: 식별 코드(아이디)가 기입되지 않아 통과할 수 없습니다.");
+            idInput.focus();
+            return;
+        }
+        if (pwd.length < 1) {
+            alert("🔮 시스템 예언: 비밀 주문(비밀번호)을 읊으셔야 결계가 반응합니다.");
+            pwdInput.focus();
+            return;
+        }
+
+        // 명부에서 일치하는 계정 탐색
+        const matchedAccount = wizardAccounts.find(account => account.id === id && account.password === pwd);
+
+        if (matchedAccount) {
+            // 🎉 [로그인 성공] 
+            // 브라우저 세션 메모리에 "지금 어떤 ID가 접속했는지" 박제 (상품 메인페이지와 완벽 결합)
+            sessionStorage.setItem('loginUser', matchedAccount.id);
+            
+            alert(`✨ 계약자 확인: 어서오십시오, [${matchedAccount.name}] 마법사님!`);
+            location.href = "../introduction/FDC.html"; // 상품 대시보드 메인으로 통과
+        } else {
+            // ❌ [로그인 실패]
+            alert("⚠️ 결계 경고: 식별 코드가 틀렸거나 비밀 주문이 유효하지 않습니다.");
+            pwdInput.focus();
+        }
+    }
+
+    // ==========================================
+    // 3. 🔮 계정 정보 교차 추적 시스템 (ID/PW 찾기)
+    // ==========================================
+    const findModal = document.getElementById("findModal");
+    const findHeader = document.getElementById("findHeader");
+    const dynamicLabel = document.getElementById("dynamicLabel");
+    const dynamicInput = document.getElementById("dynamicInput");
+    const findSubmitBtn = document.getElementById("findSubmitBtn");
+
+    // 찾기 버튼 클릭 시 모달창 세팅 및 전개
+    function openFindModal(mode) {
+        currentFindMode = mode;
+        // 입력 필드 초기화
+        document.getElementById("findName").value = "";
+        dynamicInput.value = "";
+
+        if (mode === "id") {
+            // 🔍 아이디 찾기 모드 (이름 + 비밀번호로 탐색)
+            findHeader.textContent = "🔮 식별 코드(ID) 정밀 추적";
+            dynamicLabel.textContent = "비밀 주문 (PW)";
+            dynamicInput.placeholder = "등록하셨던 비밀번호 입력";
+            dynamicInput.type = "password";
+        } else {
+            // 🔍 비밀번호 찾기 모드 (이름 + 아이디로 탐색)
+            findHeader.textContent = "🔮 비밀 주문(PW) 영혼 조회";
+            dynamicLabel.textContent = "차원 식별 코드 (ID)";
+            dynamicInput.placeholder = "등록하셨던 아이디 입력";
+            dynamicInput.type = "text";
+        }
+
+        findModal.style.display = "flex";
+    }
+
+    // 모달창 폐쇄 의식
+    function closeFindModal() {
+        findModal.style.display = "none";
+    }
+
+    // 정보 추적 버튼 클릭 시 실행할 예언 로직
+    findSubmitBtn.addEventListener("click", function() {
+        const name = document.getElementById("findName").value.trim();
+        const subValue = dynamicInput.value.trim();
+
+        if (name.length < 1) {
+            alert("🔮 시스템 예언: 대상자의 마법사 이름을 적어야 탐색 주문이 발동합니다.");
+            return;
+        }
+        if (subValue.length < 1) {
+            alert(`🔮 시스템 예언: 교차 검증용 데이터를 입력해 주세요.`);
+            return;
+        }
+
+        if (currentFindMode === "id") {
+            // 1) 아이디 찾기: 이름과 비밀번호(subValue) 매칭 체크
+            const found = wizardAccounts.find(account => account.name === name && account.password === subValue);
+            
+            if (found) {
+                alert(`✨ 예언 성공!\n[${name}] 마법사님의 고유 식별 코드는 [ ${found.id} ] 입니다.`);
+                closeFindModal();
+            } else {
+                alert("⚠️ 결계 경고: 기입하신 정보와 일치하는 마법사 기록을 찾을 수 없습니다.");
+            }
+        } else {
+            // 2) 비밀번호 찾기: 이름과 아이디(subValue) 매칭 체크
+            const found = wizardAccounts.find(account => account.name === name && account.id === subValue);
+            
+            if (found) {
+                alert(`✨ 예언 성공!\n[${name}] 마법사님의 비밀 주문은 [ ${found.password} ] 입니다.`);
+                closeFindModal();
+            } else {
+                alert("⚠️ 결계 경고: 기입하신 정보와 일치하는 마법사 기록을 찾을 수 없습니다.");
+            }
+        }
+    });
+
+    // 바깥 어두운 배경 클릭 시 자동으로 찾기 모달창 닫기 예외 처리 결계
+    findModal.addEventListener("click", function(e) {
+        if (e.target === findModal) closeFindModal();
+    });
+</script>

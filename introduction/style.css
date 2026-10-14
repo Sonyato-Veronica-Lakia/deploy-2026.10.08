@@ -483,14 +483,139 @@ body {
 .crystal-spinner {
   width: 60px;
   height: 60px;
-  border: 5px solid rgba(238, 130, 238, 0.2); /* 은은한 연보라 바깥 링 */
-  border-top: 5px solid violet; /* 회전할 머리 부분 색상 */
+  border: 5px solid rgba(238, 130, 238, 0.2);
+  /* 은은한 연보라 바깥 링 */
+  border-top: 5px solid violet;
+  /* 회전할 머리 부분 색상 */
   border-radius: 50%;
-  animation: magicSpin 1s cubic-bezier(0.42, 0, 0.58, 1) infinite; /* 세련된 가속 회전 */
+  animation: magicSpin 1s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+  /* 세련된 가속 회전 */
   box-shadow: 0 0 15px rgba(238, 130, 238, 0.6);
 }
 
 @keyframes magicSpin {
-  0% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   🔮 [신규 추가] Fairy Dispatch Company 전용 마법 오디오 플레이어 스타일 
+   ========================================================================== */
+
+/* 사이드바 최하단 플레이어 박스 (기존 .widget 및 .side-link의 패딩/라운딩 디자인 계승) */
+.magic-player {
+  margin-top: auto; /* 사이드바 최하단 고정 */
+  padding: 18px 15px;
+  background-color: rgba(0, 0, 0, 0.2); /* 기존 테마 배경과 조화를 이루는 어두운 반투명 */
+  border: 2px solid purple;
+  border-radius: 15px;
+  box-sizing: border-box;
+  text-align: center;
+  margin-bottom: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: border-color 0.3s ease;
+}
+
+/* 재생 중일 때 플레이어 외곽선 변형 (마법 결계 동기화 효과) */
+.magic-player.playing {
+  border-color: violet;
+}
+
+/* 타이틀 라벨 (.widget-title의 보라색 감성 계승) */
+.player-title {
+  font-size: 12px;
+  font-weight: bold;
+  color: violet;
+  margin-bottom: 12px;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 5px rgba(238, 130, 238, 0.3);
+}
+
+/* 내부 정렬 레이아웃 */
+.player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* 💿 디스크 회전 애니메이션 키프레임 */
+@keyframes mini-spin {
   100% { transform: rotate(360deg); }
+}
+
+/* LP판 기본 디자인 */
+.mini-vinyl {
+  font-size: 2.4rem;
+  line-height: 1;
+  display: inline-block;
+  animation: mini-spin 4s linear infinite;
+  animation-play-state: paused; /* 기본 정지 */
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+  transition: filter 0.4s ease;
+}
+
+/* 재생 중일 때 디스크 회전 활성화 및 연보라색 마법 아우라 발산 */
+.magic-player.playing .mini-vinyl {
+  animation-play-state: running;
+  filter: drop-shadow(0 0 10px rgba(238, 130, 238, 0.85));
+}
+
+/* 재생/정지 버튼 펄스(빛 퍼짐) 효과 키프레임 - 기존 모달 및 경고 색상 톤 일치 */
+@keyframes pulse-purple {
+  0%   { box-shadow: 0 0 0 0 rgba(238, 130, 238, 0.6); }
+  100% { box-shadow: 0 0 0 12px rgba(238, 130, 238, 0); }
+}
+@keyframes pulse-red {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.5); }
+  100% { box-shadow: 0 0 0 12px rgba(255, 77, 77, 0); }
+}
+
+/* 미니 재생 제어 버튼 기본 스타일 (.log-clear-btn 및 .modal-btn 감성 일치) */
+.m-play-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: #f524d2; /* 초기 정지 상태: 로그 초기화와 동일한 경고성 빨간색 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  animation: pulse-red 1.5s infinite;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 버튼 마우스 호버 효과 (.widget:hover의 확대 감성 계승) */
+.m-play-btn:hover {
+  transform: scale(1.12);
+}
+
+/* 재생 중일 때 버튼 스타일 변형 (.box .btn-buy:hover의 violet/purple 색상 반전 흐름 일치) */
+.magic-player.playing .m-play-btn {
+  background-color: violet;
+  color: purple;
+  animation: pulse-purple 1.5s infinite;
+}
+
+/* 모바일 및 태블릿 환경 반응형 처리 (@media (max-width: 900px) 대응) */
+@media (max-width: 900px) {
+  .magic-player {
+    margin-top: 10px;
+    flex: 1 1 100%; /* 부모 flex-wrap 구조 내에서 한 줄 전체 차지하도록 설정 */
+    padding: 12px;
+  }
+  .player-controls {
+    gap: 15px;
+  }
 }

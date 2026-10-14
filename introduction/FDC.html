@@ -11,26 +11,37 @@
 
 <body>
 
+  <!-- 실제 오디오 태그: 준비하신 음악 파일 경로(music.mp3)와 매칭 -->
+  <audio id="my-audio" src="music1.mp3" preload="auto"></audio>
+
   <div id="container">
 
     <!-- 헤더 영역 -->
     <div class="layout-box" id="header">
       <div id="logo">Fairy Dispatch Company</div>
       <div id="menu">
-        <a href="javascript:;">List</a>
-        <!-- 🔮 제공해주신 공식 FDC 소개 페이지 주소를 명확하게 심었습니다 -->
-        <a href="../introduction/introductionB.html" id="mypage-link">My Page</a>
-        <a href="javascript:;">Logout</a>
+        <a href="javascript:;" id="list-link">List</a>
+        <a href="javascript:;" id="mypage-link">My Page</a>
+        <a href="javascript:;" id="login-toggle-btn">Login</a>
       </div>
     </div>
 
-    <!-- 사이드 메뉴 영역 (Watchers 테마) -->
-    <div class="layout-box" id="side">
+    <!-- 사이드 메뉴 영역 (Watchers 테마 & 미니 재생바 결합) -->
+    <div class="layout-box" id="side" style="display: flex; flex-direction: column;">
       <div class="side-menu-title">🔮 Watchers</div>
       <div class="side-link active" data-target="dashboard-view">Main</div>
       <div class="side-link" data-target="product-view">Fairy</div>
       <div class="side-link" data-target="logs-view">Log</div>
       <div class="side-link" data-target="settings-view">Modify</div>
+
+      <!-- 🎵 사이드바 최하단 마법 앰비언트 재생바 -->
+      <div class="magic-player" id="bgm-player">
+        <div class="player-title">🎵 FDC AMBIENT BGM</div>
+        <div class="player-controls">
+          <div class="mini-vinyl" id="player-vinyl">💿</div>
+          <div class="m-play-btn" id="player-btn">▶</div>
+        </div>
+      </div>
     </div>
 
     <!-- 메인 콘텐츠 영역 -->
@@ -50,7 +61,7 @@
 
         <div class="widget">
           <div class="widget-title">🌙 신규 계약 마법사</div>
-          <div class="word">42명 방문</div>
+          <div class="word">계약 대기 중</div>
         </div>
 
         <div class="widget">
@@ -102,7 +113,7 @@
         <div class="log-container">
           <div class="log-header-title">📜 실시간 요정 소환 프로토콜</div>
           <ul id="log-list" class="log-list">
-            <!-- 자바스크립트로 소환 로그 기록이 여기에 하나씩 추가됩니다 -->
+            <!-- 자바스크립트로 소환 로그 기록 주입 구조 -->
           </ul>
           <div class="log-footer-actions">
             <button id="log-clear-btn" class="log-clear-btn">🪄 로그 전체 초기화</button>
@@ -124,7 +135,7 @@
 
   </div>
 
-  <!-- 🔮 1단계: 소환하기 버튼 누르면 가격 띄우고 의사를 묻는 소환 전용 컨펌창 -->
+  <!-- 1단계: 가격을 명시하여 소환 여부를 묻는 전용 컨펌창 -->
   <div id="summon-confirm-modal" class="modal-overlay">
     <div class="modal-box">
       <div class="modal-header">🔮 소환 의식 의뢰</div>
@@ -136,7 +147,7 @@
     </div>
   </div>
 
-  <!-- 🔮 2단계: '소환' 클릭 시 2초 동안 부드럽게 가속 회전하는 마법진 로딩 스피너 -->
+  <!-- 2단계: 가속 회전하는 마법진 로딩 스피너 -->
   <div id="magic-spinner" class="modal-overlay">
     <div class="spinner-box">
       <div class="crystal-spinner"></div>
@@ -144,7 +155,7 @@
     </div>
   </div>
 
-  <!-- 3단계: 소환이 완전히 끝나면 최종 표기되는 완료 알림창 (모달) 뼈대 -->
+  <!-- 3단계: 최종 표기되는 완료 알림창 (모달) 뼈대 -->
   <div id="custom-alert" class="modal-overlay">
     <div class="modal-box">
       <div class="modal-header">🔮 시스템 예언</div>
@@ -153,7 +164,7 @@
     </div>
   </div>
 
-  <!-- 로그 전체 파기 시 작동하는 경고용 '확인 / 취소' 모달 창 뼈대 -->
+  <!-- 로그 전체 파기 시 작동하는 경고용 모달 창 뼈대 -->
   <div id="custom-confirm" class="modal-overlay">
     <div class="modal-box">
       <div class="modal-header">⚠️ 결계 경고</div>
