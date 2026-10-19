@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specs - 김동주</title>
+    <!-- 1번 조건: 외부 CSS 분리 연동 -->
+    <link rel="stylesheet" href="subStyle.css">
+</head>
+
+<body>
+    <div class="sub-page-wrapper spec-page-width">
+        
+        <!-- 6번 조건: 무조건 두 자리(00:00:00)로 표시되는 실시간 디지털 시계 -->
+        <div class="clock-area">
+            현재 시각: <span id="live-clock">00:00:00</span>
+        </div>
+
+        <!-- 순수 HTML 타이틀 -->
+        <h2>Specs</h2>
+
+        <div class="spec-container">
+            <!-- 1. 학력 구역 -->
+            <div class="section-box">
+                <span class="section-title">학력 연혁</span>
+                <table class="spec-table">
+                    <tr>
+                        <th>학교명</th>
+                        <th>학과 · 전공</th>
+                        <th>졸업년월</th>
+                    </tr>
+                    <tr>
+                        <td>행복고등학교</td>
+                        <td>자연계열 (이과)</td>
+                        <td>2019.02</td>
+                    </tr>
+                    <tr>
+                        <td>이상한 나라의 대학교 서울캠퍼스</td>
+                        <td>전자전기공학부</td>
+                        <td>2027.02</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 2. 자격증 구역 -->
+            <div class="section-box">
+                <span class="section-title">자격증 및 어학</span>
+                <table class="spec-table">
+                    <tr>
+                        <th>자격증 명칭</th>
+                        <th>취득 날짜</th>
+                        <th>유효 기간</th>
+                    </tr>
+                    <tr>
+                        <td>전자기사</td>
+                        <td>-</td>
+                        <td>상시 (영구)</td>
+                    </tr>
+                    <tr>
+                        <td>멀티미디어콘텐츠제작전문가</td>
+                        <td>-</td>
+                        <td>상시 (영구)</td>
+                    </tr>
+                    <tr>
+                        <td>TOEIC</td>
+                        <td>-</td>
+                        <td>2년 (취득일 기준)</td>
+                    </tr>
+                    <tr>
+                        <td>SQLD (SQL 개발자)</td>
+                        <td>-</td>
+                        <td>영구 (보수교육 완료 시)</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 3. 프로그램 수강 구역 -->
+            <div class="section-box">
+                <span class="section-title">교육 수강 이력</span>
+                <table class="spec-table">
+                    <tr>
+                        <th>교육 과정명</th>
+                        <th>교육 기간</th>
+                        <th>교육 기관</th>
+                    </tr>
+                    <tr>
+                        <td>KDT 풀스택</td>
+                        <td>2026.08.31 ~ 2027.03.17</td>
+                        <td>인천 더조은컴퓨터학원</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <button type="button" class="back-btn" onclick="handleBack()">이전 화면으로</button>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            const clockNode = document.getElementById('live-clock');
+            if(clockNode) clockNode.textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        window.addEventListener('DOMContentLoaded', updateClock);
+
+        function handleBack() {
+            const check = confirm("메인 페이지로 복귀하시겠습니까?");
+            if (check) {
+                history.back();
+            }
+        }
+    </script>
+</body>
+
+</html>

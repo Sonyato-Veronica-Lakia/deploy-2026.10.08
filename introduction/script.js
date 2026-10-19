@@ -180,6 +180,13 @@ renderLogs();
 // 🔮 3. 로그인 상태 세션 관리 및 대시보드 신규 가입 마법사 수 연동
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", function() {
+  
+  if (sessionStorage.getItem('loginUser') == null) {
+    alert("🔮 시스템 예언: 먼저 마법 계약(로그인)을 맺으십시오.");
+    location.href = "login.html"; // 로그인 안 했으면 로그인 창으로 튕김
+    return;
+  }
+  
   const loginToggleBtn = document.getElementById('login-toggle-btn');
   const listLink = document.getElementById('list-link');
   const mypageLink = document.getElementById('mypage-link');
@@ -200,6 +207,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // 현재 브라우저 세션에 로그인한 마법사 ID가 있는지 판별
   const loginUser = sessionStorage.getItem('loginUser'); 
+
+  const loginUserName = sessionStorage.getItem('loginUserName') || loginUser; 
 
   if (!loginUser) {
     // 🔓 [비로그인 상태 프로토콜]
@@ -234,7 +243,7 @@ document.addEventListener("DOMContentLoaded", function() {
   } else {
     // 🔐 [로그인 완료 상태 프로토콜]
     if (loginToggleBtn) {
-      loginToggleBtn.textContent = `${loginUser} 님 로그아웃`;
+      loginToggleBtn.textContent = `${loginUserName} 님 로그아웃`;
       loginToggleBtn.style.backgroundColor = "#ff4d4d"; // 로그아웃은 파기용 빨간색 변경
     }
     
@@ -265,6 +274,7 @@ document.addEventListener("DOMContentLoaded", function() {
         e.preventDefault();
         if (confirm("🔮 정말로 결계를 닫고 로그아웃 하시겠습니까?")) {
           sessionStorage.removeItem('loginUser');
+          sessionStorage.removeItem('loginUserName'); 
           location.reload(); // 초기 상태로 새로고침 리셋
         }
       });

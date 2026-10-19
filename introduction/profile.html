@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - 김동주</title>
+    <link rel="stylesheet" href="subStyle.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+    <div id="app" class="sub-page-wrapper">
+        
+        <div class="clock-area">
+            현재 시각: <span id="live-clock">00:00:00</span>
+        </div>
+
+        <h2>{{ pageTitle }}</h2>
+        
+        <div class="profile-layout">
+            <div class="profile-photo">👨‍💻</div>
+            <div class="profile-details">
+                <div class="profile-name">{{ userName }} <span>({{ userEngName }})</span></div>
+                <div><strong>Email :</strong> {{ email }}</div>
+                <div><strong>Role :</strong> {{ role }}</div>
+                <div><strong>Status :</strong> {{ status }}</div>
+            </div>
+        </div>
+
+        <!-- 클릭 시 알림창을 띄우는 버튼 -->
+        <button type="button" class="back-btn" @click="handleBack">이전 화면으로</button>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            const timeString = `${hours}:${minutes}:${seconds}`;
+
+            const clockNode = document.getElementById('live-clock');
+            if(clockNode) clockNode.textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        window.addEventListener('DOMContentLoaded', updateClock);
+
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    pageTitle: "Profile",
+                    userName: "김동주",
+                    userEngName: "Kim Dong Ju",
+                    email: "jak1112@naver.com",
+                    role: "Engineer",
+                    status: "Online"
+                }
+            },
+            methods: {
+                handleBack() {
+                    alert("이전 페이지로 이동합니다.");
+                    history.back();
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

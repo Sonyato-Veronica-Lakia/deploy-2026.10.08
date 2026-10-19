@@ -4,14 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fairy Dispatch Company - 통합 관리 시스템</title>
-  <!-- 외부 CSS 스타일시트 연결 -->
+  <title>Fairy Dispatch Company - 메인</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- 실제 오디오 태그: 준비하신 음악 파일 경로(music.mp3)와 매칭 -->
+  <!-- 오디오 태그 -->
   <audio id="my-audio" src="music1.mp3" preload="auto"></audio>
 
   <div id="container">
@@ -26,7 +25,7 @@
       </div>
     </div>
 
-    <!-- 사이드 메뉴 영역 (Watchers 테마 & 미니 재생바 결합) -->
+    <!-- 사이드 메뉴  -->
     <div class="layout-box" id="side" style="display: flex; flex-direction: column;">
       <div class="side-menu-title">🔮 Watchers</div>
       <div class="side-link active" data-target="dashboard-view">Main</div>
@@ -34,7 +33,7 @@
       <div class="side-link" data-target="logs-view">Log</div>
       <div class="side-link" data-target="settings-view">Modify</div>
 
-      <!-- 🎵 사이드바 최하단 마법 앰비언트 재생바 -->
+      <!--  사이드바 재생바 -->
       <div class="magic-player" id="bgm-player">
         <div class="player-title">🎵 FDC AMBIENT BGM</div>
         <div class="player-controls">
@@ -155,7 +154,7 @@
     </div>
   </div>
 
-  <!-- 3단계: 최종 표기되는 완료 알림창 (모달) 뼈대 -->
+  <!-- 3단계: 최종 표기되는 완료 알림창 -->
   <div id="custom-alert" class="modal-overlay">
     <div class="modal-box">
       <div class="modal-header">🔮 시스템 예언</div>
@@ -164,7 +163,7 @@
     </div>
   </div>
 
-  <!-- 로그 전체 파기 시 작동하는 경고용 모달 창 뼈대 -->
+  <!-- 로그 전체 파기 시 작동하는 경고 -->
   <div id="custom-confirm" class="modal-overlay">
     <div class="modal-box">
       <div class="modal-header">⚠️ 결계 경고</div>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interests - 김동주</title>
+    <!-- 1번 조건: 외부 CSS 분리 연동 -->
+    <link rel="stylesheet" href="subStyle.css">
+</head>
+
+<body>
+    <div class="sub-page-wrapper card-page-width">
+
+        <!-- 6번 조건: 무조건 두 자리(00:00:00)로 표시되는 실시간 디지털 시계 -->
+        <div class="clock-area">
+            현재 시각: <span id="live-clock">00:00:00</span>
+        </div>
+
+        <h2>Interests</h2>
+
+        <div class="interests-main-content">
+            <!-- 취미 섹션 -->
+            <div class="section-box">
+                <span class="section-title">취미</span>
+                <ol class="content-list hobby-grid">
+                    <li>만화(애니메이션) 보기</li>
+                    <li>게임 하기</li>
+                    <li>노래 부르기</li>
+                    <li>그림 그리기</li>
+                    <li>코딩 하기</li>
+                    <li>AI 프롬프트 수정하기</li>
+                </ol>
+            </div>
+
+            <!-- 좋아하는 것들 섹션 -->
+            <div class="section-box">
+                <span class="section-title">좋아하는 것들</span>
+                <div class="content-list favorite-flex-box">
+                    <div class="fav-card-item">
+                        <a href="https://genshin.hoyoverse.com/ko/home" target="_blank" class="fav-link">
+                            <div class="fav-text-group">
+                                <span class="fav-name">원신</span>
+                                <span class="badge">좋아하는 게임</span>
+                            </div>
+                            <img src="../introduction/Genshin_Impact.jpg" class="fav-img" alt="원신">
+                        </a>
+                    </div>
+                    <div class="fav-card-item">
+                        <a href="https://x.com/toei_EXAID" target="_blank" class="fav-link">
+                            <div class="fav-text-group">
+                                <span class="fav-name">가면라이더 에그제이드</span>
+                                <span class="badge">좋아하는 작품</span>
+                            </div>
+                            <img src="../introduction/Kamen_Rider_Ex-Aid_logo.jpg" class="fav-img" alt="가면라이더">
+                        </a>
+                    </div>
+                    <div class="fav-card-item">
+                        <a href="https://youtu.be/8m1cUgLepmY?si=fPLVxX6siQgKXHTz" target="_blank" class="fav-link">
+                            <div class="fav-text-group">
+                                <span class="fav-name">시네마</span>
+                                <span class="badge">좋아하는 노래</span>
+                            </div>
+                            <img src="../introduction/Cinema.jpg" class="fav-img" alt="시네마">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 명대사 섹션 -->
+            <div class="section-box">
+                <span class="section-title">좋아하는 구절(명대사)</span>
+                <div class="quote-container">
+                    <div class="quote-box">"환자의 운명은 내가 바꾸겠어!"</div>
+                    <div class="quote-box">"행동하지 않으면 아무것도 바뀌지 않아."</div>
+                    <div class="quote-box">"내가 걷는 길은 내가 개척한다."</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 이전 버튼 -->
+        <button type="button" class="back-btn" onclick="handleBack()">이전 화면으로</button>
+    </div>
+
+    <script>
+        // 6번 조건: 무조건 두 자리 고정형 실시간 디지털시계
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            const clockNode = document.getElementById('live-clock');
+            if (clockNode) clockNode.textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        window.addEventListener('DOMContentLoaded', updateClock);
+
+        // 5번 조건: 최소 1개 이상의 confirm() 사용
+        function handleBack() {
+            const check = confirm("메인 페이지로 복귀하시겠습니까?");
+            if (check) {
+                history.back();
+            }
+        }
+    </script>
+</body>
+
+</html>

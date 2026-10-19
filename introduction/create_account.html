@@ -1,183 +1,15 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fairy Dispatch Company - 계약 맺기</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        /* 🔮 대시보드와 동일한 톤앤매너 배경 및 폰트 세팅 */
-        body {
-            background-color: #73607b;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            margin: 0;
-            font-family: sans-serif;
-        }
-
-        /* 🔮 대시보드 모달/위젯 테마 버무리트 (다크바이올렛 + 바이올렛 테두리) */
-        #app {
-            background-color: darkviolet;
-            border: 3px solid violet;
-            width: 100%;
-            max-width: 400px;
-            padding: 45px 30px;
-            border-radius: 20px;
-            /* 대시보드 곡률 20px 통일 */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        #container h2 {
-            color: #ffffff;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            text-align: center;
-        }
-
-        #container p {
-            color: #e0b0ff;
-            /* 연보라색 서브 텍스트 */
-            font-size: 14px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        /* 입력 필드 영역 */
-        .input-group {
-            margin-bottom: 18px;
-        }
-
-        .input-group span {
-            display: block;
-            font-size: 13px;
-            color: violet;
-            /* 포인트 컬러 */
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        /* 🔮 입력창 디자인 (마법진 내부 폼 스타일) */
-        .input-group input {
-            width: 100%;
-            padding: 14px;
-            font-size: 14px;
-            background-color: rgba(255, 255, 255, 0.95);
-            /* 깔끔한 화이트톤 베이스 */
-            border: 2px solid purple;
-            border-radius: 8px;
-            outline: none;
-            color: #333;
-        }
-
-        .input-group input:focus {
-            border-color: violet;
-            box-shadow: 0 0 10px rgba(238, 130, 238, 0.6);
-            /* 포커스 시 빛나는 연출 */
-        }
-
-        /* 🛠️ 중복체크 레이아웃 붕괴 완벽 방지 3줄 수식 */
-        .input-group:has(.userId) {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            /* span이 무너지지 않고 위로 고정되도록 허용 */
-        }
-
-        .input-group:has(.userId) span {
-            width: 100%;
-            /* 글씨 영역 전체 확보 */
-        }
-
-        /* 아이디 입력창 크기 보존 */
-        .input-group .userId {
-            width: 68%;
-        }
-
-        /* 🔮 중복체크 버튼 디자인 및 인풋 높이 일치 */
-        .input-group button {
-            width: 28%;
-            margin-left: 4%;
-            padding: 14px 0;
-            /* 입력창 패딩(14px)과 완벽 일치시켜 삐져나감 해결 */
-            background-color: purple;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .input-group button:hover {
-            background-color: violet;
-            color: purple;
-        }
-
-        /* 경고 문구 영역 */
-        .warning-area {
-            height: 18px;
-        }
-
-        /* 🔮 에러 문구가 잘 보이도록 형광 크림슨 계열 조정 */
-        .input-group .warning-txt {
-            color: #ff4d4d;
-            font-size: 12px;
-            margin: 2px 5px;
-            font-weight: bold;
-        }
-
-        /* 🔮 가입하기(계약하기) 버튼 대시보드 포인트 스타일과 통일 */
-        .signup-btn {
-            width: 100%;
-            padding: 15px;
-            background-color: purple;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 15px;
-            margin-bottom: 20px;
-            transition: all 0.3s;
-        }
-
-        .signup-btn:hover {
-            background-color: violet;
-            color: purple;
-        }
-
-        /* 하단 링크 */
-        .bottom-links {
-            text-align: center;
-            font-size: 13px;
-            color: #e0b0ff;
-        }
-
-        .bottom-links a {
-            color: violet;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .bottom-links a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <!-- 외부 통합 스타일시트 연결 -->
+    <link rel="stylesheet" href="fdcStyle.css">
 </head>
-
-<body>
-    <div id="app">
-        <div id="container">
+<body class="auth-body">
+    <div id="auth-app">
+        <div id="auth-container">
             <h2>마법 계약 맺기</h2>
             <p>새로운 계정을 만들어 서비스를 시작하세요.</p>
 
@@ -185,47 +17,41 @@
                 <span>이름</span>
                 <input id="userName" type="text" placeholder="마법사 이름을 입력하세요">
             </div>
-
             <div class="input-group">
                 <span>아이디</span>
                 <input id="userId" class="userId" type="text" placeholder="아이디 입력">
                 <button type="button" onclick="fnCheckId()">중복체크</button>
             </div>
-
             <div class="input-group">
                 <span>비밀번호</span>
                 <input id="pwd1" type="password" placeholder="6자 이상 입력">
-                <div class="warning-area"></div>
+                <div class="warning-area" id="warning1"></div>
             </div>
-
             <div class="input-group">
                 <span>비밀번호 확인</span>
                 <input id="pwd2" type="password" placeholder="비밀번호 재입력">
-                <div class="warning-area"></div>
+                <div class="warning-area" id="warning2"></div>
             </div>
 
-            <button type="button" class="signup-btn" onclick="fnJoin()">계약서 제출하기</button>
+            <button type="button" class="auth-btn" onclick="fnJoin()">계약서 제출하기</button>
 
             <div class="bottom-links">
-                이미 마법사 계약이 되어있나요?
-                <a href="login.html">로그인 페이지로</a>
+                이미 마법사 계약이 되어있나요? <a href="login.html">로그인 페이지로</a>
             </div>
         </div>
     </div>
-
-    <!-- 스크립트 영역은 2부에서 이어집니다 -->
+    <!-- 자바스크립트는 동주님의 가입 유효성 스크립트 그대로 유지 -->
 </body>
-
 </html>
+
 <script>
-    // ==========================================
-    // 1. 초기 데이터 바인딩 및 상태 관리
-    // ==========================================
-    // 대시보드 시스템과 데이터 저장소 명칭을 통일합니다.
+    // =========================================
+    // 1. 회원 가입
+    // 대시보드 시스템과 데이터 저장소 명칭을 통일
     // 회원 목록 데이터가 없으면 빈 배열([])로 세팅합니다.
     let wizardAccounts = JSON.parse(localStorage.getItem('wizardAccounts')) || [];
 
-    // 중복체크 통과 여부를 보존하는 마법 기믹
+    // 중복체크 통과 여부 보존
     let isIdChecked = false;
     let checkedIdString = "";
 
@@ -236,7 +62,7 @@
     });
 
     // ==========================================
-    // 2. 차원 식별 코드(아이디) 중복체크 프로토콜
+    // 2. 아이디 중복체크
     // ==========================================
     function fnCheckId() {
         const idInput = document.getElementById("userId");
@@ -254,7 +80,7 @@
             return;
         }
 
-        // 정규식 검사 (영문 소문자 및 숫자 조합 확인)
+        // 영문 소문자 및 숫자 조합 확인
         const regex = /^[a-z0-9]+$/;
         if (!regex.test(id)) {
             alert("🔮 시스템 예언: 식별 코드는 영문 소문자와 숫자 조합만 결계가 허용합니다.");
@@ -262,7 +88,7 @@
             return;
         }
 
-        // localStorage에서 이미 계약된 마법사 아이디가 있는지 탐색
+        // localStorage에서 중복 아이디가 있는지 탐색
         const isExist = wizardAccounts.some(account => account.id === id);
 
         if (isExist) {
@@ -277,7 +103,7 @@
     }
 
     // ==========================================
-    // 3. 마법 계약서(회원가입) 최종 서명 검증
+    // 3. 회원가입 최종 검증
     // ==========================================
     function fnJoin() {
         // 입력 노드 탐색
@@ -296,7 +122,7 @@
         const pwd1Warning = warningAreas[0]; // 비밀번호 밑 영역
         const pwd2Warning = warningAreas[1]; // 비밀번호 확인 밑 영역
 
-        // 기존 경고 문구 청소
+        // 기존 경고 문구 지우기
         pwd1Warning.innerHTML = '';
         pwd2Warning.innerHTML = '';
 
@@ -321,7 +147,7 @@
             return;
         }
 
-        // [검증 4] 비밀번호 필드 확인 및 크림슨 경고창 출력
+        // [검증 4] 비밀번호 확인 및 경고창 출력
         if (pwd1.length < 1) {
             pwd1Warning.innerHTML = '<p class="warning-txt">⚠️ 결계 암호가 비어있습니다. 주문을 기입하세요.</p>';
             pwd1Input.focus();
@@ -334,7 +160,7 @@
             return;
         }
 
-        // [검증 5] 이중 봉인 일치 확인 및 크림슨 경고창 출력
+        // [검증 5] 이중 일치 확인 및 경고창 출력
         if (pwd1 !== pwd2) {
             pwd2Warning.innerHTML = '<p class="warning-txt">⚠️ 이중 마법 봉인 암호가 서로 일치하지 않습니다.</p>';
             pwd2Input.focus();
@@ -342,9 +168,9 @@
         }
 
         // ==========================================
-        // 4. 데이터 보존 및 차원 전송 단계
+        // 4. 데이터 보존 및 메인 페이지 이동 단계
         // ==========================================
-        // 새로운 마법사 객체 생성
+        // 새로운 유저 객체 생성
         const newWizard = {
             userName: userName,
             id: id,
@@ -359,7 +185,6 @@
         // 최종 성공 서명
         alert("✨ 계약 성공!! 대마법사 명부에 무사히 등록되었습니다. 차원 이동을 시작합니다.");
 
-        // 🔮 로그인 창이 준비되면 자동으로 이동되도록 주석 해제하여 사용 가능합니다.
-        // location.href = "login.html";
+        location.href = "login.html"
     }
 </script>

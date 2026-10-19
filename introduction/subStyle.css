@@ -1,0 +1,280 @@
+
+
+
+/* ==========================기본 리셋 및 폰트 설정 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #754374;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: sans-serif;
+}
+
+/* Vue 구동 */
+[v-cloak] {
+    display: none !important;
+}
+
+/* 실시간 시계 레이아웃 */
+.clock-area {
+    text-align: right;
+    font-size: 13px;
+    color: #888888;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.clock-area span, #live-clock {
+    color: violet;
+}
+
+/* 공통 외곽 컨테이너 박스 */
+.sub-page-wrapper {
+    width: 100%;
+    max-width: 900px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    padding: 40px;
+}
+
+/* 타이틀 라인 */
+.sub-page-wrapper h2 {
+    font-size: 26px;
+    color: #222222;
+    margin-bottom: 25px;
+    font-weight: 700;
+    border-bottom: 2px solid violet;
+    padding-bottom: 12px;
+}
+
+/* 호버 애니메이션 및 트랜지션 버튼 */
+.back-btn {
+    margin-top: 40px;
+    width: 100%;
+    padding: 14px;
+    background: violet;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.2s ease-in-out;
+}
+
+.back-btn:hover {
+    background: darkviolet;
+    transform: translateY(-2px);
+}
+
+/* 섹션 분할 박스 공통 타이틀 라인 */
+.section-box {
+    margin-bottom: 25px;
+}
+
+.section-title {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    border-left: 3px solid violet;
+    padding-left: 8px;
+}
+
+/* 일반 리셋 목록 리스트 */
+.content-list {
+    list-style-position: inside;
+    color: #555;
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+
+/* ===========  1. Profile 페이지 전용 레이아웃 스타일 */
+.profile-layout {
+    display: flex;
+    gap: 35px;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.profile-photo {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 55px;
+    border: 2px solid #e1e4e8;
+}
+
+.profile-details {
+    color: #4f5660;
+    line-height: 1.9;
+    font-size: 16px;
+}
+
+.profile-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111111;
+    margin-bottom: 10px;
+}
+
+.profile-name span {
+    font-size: 15px;
+    color: #888888;
+    font-weight: normal;
+}
+
+
+/* ===================== 2. Interests 페이지 전용 레이아웃 스타일 */
+.card-page-width {
+    max-width: 600px;
+}
+
+.interests-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* 취미 구역  */
+.hobby-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    list-style-position: inside;
+    padding: 5px;
+}
+
+.hobby-grid li {
+    background: #fdfdfd;
+    border: 1px solid #eef2f5;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #4f5660;
+    font-weight: 500;
+}
+
+/* 좋아하는 것들 구역 */
+.favorite-flex-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.fav-card-item {
+    background: #ffffff;
+    border: 2px solid #eef2f5;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    padding: 14px 20px;
+    color: inherit;
+}
+
+.fav-card-item:hover {
+    border-color: violet;
+    box-shadow: 0 8px 20px rgba(238, 130, 238, 0.15);
+    transform: translateY(-3px);
+}
+
+.fav-text-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.fav-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1d20;
+}
+
+.badge {
+    font-size: 12px;
+    color: violet;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+/* 이미지 규격 고정 */
+.fav-img {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #eef2f5;
+}
+
+/* 명대사 구역 감성 보드 */
+.quote-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.quote-box {
+    background: #fdfbfd;
+    border-left: 4px solid violet;
+    padding: 12px 16px;
+    border-radius: 4px 8px 8px 4px;
+    font-size: 14px;
+    color: #555962;
+    font-style: italic;
+    font-weight: 500;
+}
+
+
+/* ===================== 3. Specs 페이지 전용 데이터 테이블 스타일 */
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+table, tr, th, td {
+    border: 2px solid rgba(255, 12, 93, 0.168);
+    border-collapse: collapse;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: rgba(155, 24, 255, 0.404);
+    color: navy;
+}
+
+.zzz {
+    color: rgba(253, 96, 253, 0.645);
+}
+
+tr {
+    transition: background-color 0.2s ease;
+}
+
+tr:hover:not(:first-child) {
+    background-color: #5d19b690;
+    color: white;
+}

@@ -1,0 +1,542 @@
+/* ==========================================================================
+   🔮 [공통 기본형] 리셋 및 전역 스타일
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #73607b; /* 전체 마법 결계 베이스 배경색 */
+    font-family: sans-serif;
+}
+
+
+/* ==========================================================================
+   🔐 [인증 파트] 로그인(login) 및 회원가입(create_account) 공통 폼 디자인
+   ========================================================================== */
+.auth-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* 메인 폼 박스 박스 (곡률 20px 통일) */
+#auth-app {
+    background-color: darkviolet;
+    border: 3px solid violet;
+    width: 100%;
+    max-width: 400px;
+    padding: 45px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+#auth-container h2 {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+#auth-container p {
+    color: #e0b0ff;
+    font-size: 14px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* 입력 필드 그룹 */
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group span {
+    display: block;
+    font-size: 13px;
+    color: violet;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+/* 마법진 내부 인풋 스타일 */
+.input-group input {
+    width: 100%;
+    padding: 14px;
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid purple;
+    border-radius: 8px;
+    outline: none;
+    color: #333;
+}
+
+.input-group input:focus {
+    border-color: violet;
+    box-shadow: 0 0 10px rgba(238, 130, 238, 0.6); /* 빛나는 연출 */
+}
+
+/* 폼 전용 버튼 스타일 (4번, 7번 조건 탑재) */
+.auth-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: purple;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.auth-btn:hover {
+    background-color: violet;
+    color: purple;
+}
+
+/* 하단 앵커 서브 링크 */
+.bottom-links {
+    text-align: center;
+    font-size: 13px;
+    color: #e0b0ff;
+    line-height: 1.8;
+}
+
+.bottom-links a {
+    color: violet;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 5px;
+}
+
+.bottom-links a:hover {
+    text-decoration: underline;
+}
+
+/* 회원가입창 레이아웃 무너짐 방지 수식 */
+.input-group:has(.userId) {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.input-group:has(.userId) span {
+    width: 100%;
+}
+
+.input-group .userId {
+    width: 68%;
+}
+
+/* 중복체크용 전용 인풋 높이 일치 버튼 */
+.input-group button {
+    width: 28%;
+    margin-left: 4%;
+    padding: 14px 0;
+    background-color: purple;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.input-group button:hover {
+    background-color: violet;
+    color: purple;
+}
+
+.warning-area {
+    height: 18px;
+}
+
+.input-group .warning-txt {
+    color: #ff4d4d;
+    font-size: 12px;
+    margin: 2px 5px;
+    font-weight: bold;
+}
+
+/* ID/PW 교차 정밀 추적 팝업 모달 */
+.find-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.find-box {
+    background-color: darkviolet;
+    border: 3px solid violet;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 380px;
+    padding: 30px 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.find-header {
+    font-size: 18px;
+    font-weight: bold;
+    color: violet;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+/* ==========================================================================
+   🔮 [대시보드 본진 파트] FDC 통합 관리 시스템 전용 UI 레이아웃 스타일
+   ========================================================================== */
+.fdc-body {
+    background-color: #3a2b40; /* FDC 본진 전용 중후한 암흑 바이올렛 색상 */
+    padding: 20px;
+}
+
+#fdc-container {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* 상단 헤더, 사이드바, 본문, 푸터 박스 공통 규격 */
+.layout-box {
+    background: darkviolet;
+    border: 2px solid violet;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+#header {
+    grid-column: 1 / span 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#menu a {
+    color: #e0b0ff;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 15px;
+    transition: color 0.2s;
+}
+
+#menu a:hover {
+    color: white;
+}
+
+/* 왼쪽 사이드 메뉴 제어 */
+#side {
+    display: flex; 
+    flex-direction: column;
+}
+
+.side-menu-title {
+    color: violet;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.side-link {
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 8px;
+    transition: all 0.2s;
+}
+
+.side-link:hover, .side-link.active {
+    background: purple;
+    border-left: 4px solid violet;
+}
+
+/* 🎵 최하단 미니 비닐 플레이어 컴포넌트 */
+.magic-player {
+    margin-top: auto;
+    background: rgba(0,0,0,0.2);
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px dashed violet;
+}
+
+.player-title {
+    color: #e0b0ff;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.player-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.mini-vinyl {
+    font-size: 22px;
+    transition: transform 2s linear infinite;
+}
+
+/* 음악 플레이 브레이크 포인트 시 Vinyl 회전 기믹 애니메이션 */
+.magic-player.playing .mini-vinyl {
+    transform: rotate(360deg);
+}
+
+.m-play-btn {
+    cursor: pointer;
+    background: #ff4d4d;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+/* 메인 대시보드 탭 제어 컨테이너 */
+#contents {
+    display: grid;
+    gap: 20px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* 대시보드 미니 정보 위젯 */
+.widget {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid purple;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.widget-title {
+    color: violet;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.word {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* 요정 분배 카드 상품 정보 타일 */
+.box {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid purple;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.box-img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    object-fit: contain;
+}
+
+.box-info {
+    text-align: center;
+    color: white;
+}
+
+.box-title {
+    font-weight: bold;
+    font-size: 16px;
+    color: #e0b0ff;
+}
+
+.box-desc {
+    font-size: 12px;
+    margin-top: 5px;
+    color: #ccc;
+}
+
+.btn-buy {
+    width: 100%;
+    padding: 10px;
+    background: purple;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.btn-buy:hover {
+    background: violet;
+    color: purple;
+}
+
+/* 로그 리스트 전용 뼈대 */
+.log-container {
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid purple;
+}
+
+.log-header-title {
+    color: violet;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.log-list {
+    list-style: none;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.log-item {
+    background: rgba(255,255,255,0.05);
+    margin-bottom: 8px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    color: #eee;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.log-time {
+    color: #aaa;
+    font-size: 11px;
+    margin-right: 10px;
+}
+
+.log-delete-btn {
+    background: none;
+    border: none;
+    color: #ff4d4d;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.log-clear-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* 시스템 예언 레이어 모달 시스템 */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-box {
+    background: darkviolet;
+    border: 2px solid violet;
+    border-radius: 12px;
+    padding: 25px 40px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.modal-header {
+    color: violet;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.modal-body {
+    color: white;
+    font-size: 15px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.modal-btn {
+    padding: 10px 24px;
+    background: purple;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* 🌀 로딩 스피너 애니메이션 연출 */
+.spinner-box {
+    text-align: center;
+}
+
+.crystal-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(238, 130, 238, 0.2);
+    border-top: 4px solid violet;
+    border-radius: 50%;
+    animation: magic-spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes magic-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#footer {
+    grid-column: 1 / span 2;
+    text-align: center;
+    color: #e0b0ff;
+    font-size: 12px;
+}
