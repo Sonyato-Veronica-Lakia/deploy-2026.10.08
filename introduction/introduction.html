@@ -49,16 +49,15 @@
             </div>
 
             <!-- 5.  sns 링크 -->
-            <div class="grid-slot" id="slot-sidebar3" onclick="fnAlert()">
-                <a href="https://www.youtube.com/@%EB%9D%BC%ED%82%A4%EC%95%84-k3q;" target="_blank"
-                    class="info-box-link">
+            <div class="grid-slot" id="slot-sidebar3">
+                <a href="javascript:;" onclick="fnAlert('https://www.youtube.com/@%EB%9D%BC%ED%82%A4%EC%95%84-k3q')" class="info-box-link">
                     <div id="sidebar3" class="info-box center-box">SNS</div>
                 </a>
             </div>
 
             <!-- 6. FDC 링크 -->
-            <div class="grid-slot" id="slot-footer" onclick="fnAlert()">
-                <a href="../introduction/FDC.html" target="_blank" class="info-box-link">
+            <div class="grid-slot" id="slot-footer">
+                <a href="javascript:;" onclick="fnAlert('../introduction/FDC.html')" class="info-box-link">
                     <div id="footer" class="info-box center-box">~FDC~ Link</div>
                 </a>
             </div>
@@ -72,8 +71,17 @@
 </html>
 
 <script>
-    function fnAlert() {
-        alert("사이트를 새로 여시겠습니까?");
+    // 사용자가 던져준 주소(url)를 받아서 처리하는 단 하나의 스마트 함수
+    function fnAlert(url) {
+        const check = confirm("사이트를 새로 여시겠습니까?");
+
+        // 취소를 누르면 함수를 종료하여 새 창이 열리지 않게 방어
+        if (!check) {
+            return;
+        }
+
+        // 확인을 누르면 받아온 주소(url)로 새 탭을 강제 전개
+        window.open(url, '_blank');
     }
 
     function updateClock() {

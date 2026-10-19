@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <!-- 🔮 찾기 공용 모달 팝업 창 (인라인 속성 제거 완료) -->
+    <!--  찾기 공용 모달 팝업 창 -->
     <div id="findModal" class="find-modal">
         <div class="find-box">
             <div id="findHeader" class="find-header">계정 정보 조회</div>
@@ -55,14 +55,14 @@
     // ==========================================
     // 1. 회원가입 데이터 연동 및 로딩
     // ==========================================
-    // 회원가입창(signup.html)에서 가입해 둔 마법사 명부를 그대로 동기화합니다.
+    // 회원가입창(signup.html)에서 가입해 둔 마법사 명부를 그대로 동기화
     let wizardAccounts = JSON.parse(localStorage.getItem('wizardAccounts')) || [];
     
     // 현재 찾기 모드 저장 변수 ('id' 또는 'pwd')
     let currentFindMode = "id";
 
     // ==========================================
-    // 2. 마법 결계 해제 (로그인 공정)
+    // 2. 로그인
     // ==========================================
     function fnLogin() {
         const idInput = document.getElementById("loginId");
@@ -82,12 +82,12 @@
             return;
         }
 
-        // 명부에서 일치하는 계정 탐색
+        // 계정 탐색
         const matchedAccount = wizardAccounts.find(account => account.id === id && account.password === pwd);
 
         if (matchedAccount) {
             //  [로그인 성공] 
-            // 브라우저 세션 메모리에 "지금 어떤 ID가 접속했는지" 박제 (상품 메인페이지와 완벽 결합)
+            // 브라우저 세션 메모리에 "지금 어떤 ID가 접속했는지" 박제
             sessionStorage.setItem('loginUser', matchedAccount.id);
             
             sessionStorage.setItem('loginUserName', matchedAccount.userName);
@@ -102,7 +102,7 @@
     }
 
     // ==========================================
-    // 3. 🔮 계정 정보 교차 추적 시스템 (ID/PW 찾기)
+    // 3. 🔮 ID/PW 찾기
     // ==========================================
     const findModal = document.getElementById("findModal");
     const findHeader = document.getElementById("findHeader");
@@ -110,7 +110,7 @@
     const dynamicInput = document.getElementById("dynamicInput");
     const findSubmitBtn = document.getElementById("findSubmitBtn");
 
-    // 찾기 버튼 클릭 시 모달창 세팅 및 전개
+    // 찾기 버튼 클릭
     function openFindModal(mode) {
         currentFindMode = mode;
         // 입력 필드 초기화
@@ -134,7 +134,7 @@
         findModal.style.display = "flex";
     }
 
-    // 모달창 폐쇄 의식
+    // 모달창 폐쇄
     function closeFindModal() {
         findModal.style.display = "none";
     }

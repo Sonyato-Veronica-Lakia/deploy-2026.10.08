@@ -20,7 +20,7 @@ sideLinks.forEach(link => {
 });
 
 // ==========================================================================
-// 🔮 2. 소환 컨펌, 타이머 로딩 스피너 및 마력 정산 보존 시스템
+// 🔮 2. 타이머 로딩 스피너 및 마력 정산 보존 시스템
 // ==========================================================================
 let summonCount = parseInt(localStorage.getItem('summonCount'), 10) || 1234;
 let totalRevenue = parseInt(localStorage.getItem('totalRevenue'), 10) || 5123120;
@@ -177,7 +177,7 @@ if (summonConfirmModal) summonConfirmModal.addEventListener('click', (e) => { if
 renderLogs();
 
 // ==========================================================================
-// 🔮 3. 로그인 상태 세션 관리 및 대시보드 신규 가입 마법사 수 연동
+// 3. 로그인 상태 세션 관리 및 대시보드 신규 가입 마법사 수 연동
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", function() {
   
@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const loginUserName = sessionStorage.getItem('loginUserName') || loginUser; 
 
   if (!loginUser) {
-    // 🔓 [비로그인 상태 프로토콜]
+    //  [비로그인 상태 프로토콜]
     if (loginToggleBtn) loginToggleBtn.textContent = "Login";
     
     // 접근 제한 스타일(보라 안개) 부여
@@ -241,10 +241,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
   } else {
-    // 🔐 [로그인 완료 상태 프로토콜]
+    //  [로그인 완료 상태 프로토콜]
     if (loginToggleBtn) {
       loginToggleBtn.textContent = `${loginUserName} 님 로그아웃`;
-      loginToggleBtn.style.backgroundColor = "#ff4d4d"; // 로그아웃은 파기용 빨간색 변경
+      loginToggleBtn.style.backgroundColor = "#6e11e9"; // 로그아웃은 파기용 빨간색 변경
     }
     
     // 잠금 상태 스타일 해제
@@ -260,11 +260,11 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     }
 
-    // 마이페이지 누르면 지정된 자기소개서 경로로 공식 이동
+    // 마이페이지 누르면 지정된 자기소개서 경로로 이동
     if (mypageLink) {
       mypageLink.addEventListener('click', function(e) {
         e.preventDefault();
-        location.href = "../introduction/introductionB.html"; 
+        location.href = "../introduction/introduction.html"; 
       });
     }
 
@@ -283,7 +283,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // ==========================================================================
-// 🔮 4. 마법 오디오 플레이어 실제 MP3 미디어 연동 시스템
+//  4.  MP3 
 // ==========================================================================
 const bgmPlayer = document.getElementById('bgm-player');
 const playerBtn = document.getElementById('player-btn');
@@ -301,7 +301,7 @@ function toggleFdcPlay() {
     // [정지 -> 재생 돌입]
     fdcAudio.play().then(() => {
       isFdcPlaying = true;
-      if (bgmPlayer) bgmPlayer.classList.add('playing'); // 💿 디스크 회전 및 연보라 아우라 활성화
+      if (bgmPlayer) bgmPlayer.classList.add('playing');
       if (playerBtn) {
         playerBtn.textContent = '▮▮';
         playerBtn.style.backgroundColor = 'violet';
@@ -315,7 +315,7 @@ function toggleFdcPlay() {
     // [재생 -> 정지 돌입]
     fdcAudio.pause();
     isFdcPlaying = false;
-    if (bgmPlayer) bgmPlayer.classList.remove('playing'); // 💿 디스크 정지 및 빨간색 원복
+    if (bgmPlayer) bgmPlayer.classList.remove('playing'); 
     if (playerBtn) {
       playerBtn.textContent = '▶';
       playerBtn.style.backgroundColor = '#ff4d4d';
@@ -328,7 +328,8 @@ function toggleFdcPlay() {
 if (playerBtn) {
   playerBtn.addEventListener('click', function (e) {
     e.preventDefault();
-    e.stopPropagation(); // 사이드바 메뉴 탭 전환 이벤트 간섭 차단 결계
+    e.stopPropagation(); 
+    // 사이드바 메뉴 탭 전환 이벤트 간섭 차단 결계
     toggleFdcPlay();
   });
 }
