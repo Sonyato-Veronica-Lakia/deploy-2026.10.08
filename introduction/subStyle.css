@@ -247,6 +247,22 @@ body {
     font-weight: 500;
 }
 
+.quote-box .Mitya{
+    color: #858EB5;
+}
+
+.quote-box .Parad1{
+    color: #00A3E0;
+}
+.quote-box .Parad2{
+    color: #E30613;
+}
+.quote-box Cinema{
+    color: #FF7722;
+}
+
+
+
 
 /* ===================== 3. Specs 페이지 전용 데이터 테이블 스타일 */
 table {
